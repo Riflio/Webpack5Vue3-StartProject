@@ -1,0 +1,24 @@
+{
+  "name": "WebpackVue3HelloWorld",
+  "version": "1.0.0",
+  "description": "Simple start project for Webpack&Vue",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack serve",
+    "build": "cross-env NODE_ENV=production webpack",
+    "watch": "cross-env NODE_ENV=development webpack -w"
+  },
+  "author": "PavelK",
+  "license": "ISC",
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "webpack": "^5.36.2",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "@vue/compiler-sfc": "^3.0.11",
+    "vue": "^3.0.11",
+    "vue-loader": "^16.2.0"
+  }
+}
