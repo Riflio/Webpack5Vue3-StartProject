@@ -1,27 +1,54 @@
-const path = require('path')
+const path = require('path');
 const { VueLoaderPlugin } = require('vue-loader')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = {	
-	entry: './src/app.js',	
+module.exports =  (env = {}) => ({
+	entry: {
+		app: './src/main.js',
+	},
+	mode: env.production ? 'production' : 'development',	
 	output: {
 		path: path.resolve(__dirname, './dist'),
-		publicPath: '/dist/',
 	},
 	resolve: {
+		extensions: ['.ts', '.js', '.vue', '.json'],
     	alias: {
-			vue: "@vue/runtime-dom"
+			vue: 'vue/dist/vue.esm-bundler.js'
     	}
 	},
 	module: {
 		rules: [
-		{
-        	test: /\.vue$/,
-			loader: 'vue-loader'
-		}
+			{
+	        	test: /\.vue$/,
+				loader: 'vue-loader'
+			}, 
+			{
+        		test: /\.js$/,
+        		exclude: /node_modules/,
+        		use: ["babel-loader"]
+      		},
+			{
+				test: /\.css$/,
+				use: [MiniCssExtractPlugin.loader, 'css-loader']
+            },
+            {
+                test: /\.(png|jpg|gif)$/,
+                use: ['file-loader']
+            }
 		]
 	},
 	plugins: [
-		new VueLoaderPlugin()
+		new CleanWebpackPlugin(),
+		new HtmlWebpackPlugin({
+			template: path.resolve(__dirname, './src/index.html'),
+			filename: 'index.html',
+		}),    
+		new MiniCssExtractPlugin({
+      		filename: '[name].css'
+    	}),
+		new VueLoaderPlugin(),
 	],
 	devServer: {
     	inline: true,
@@ -30,4 +57,4 @@ module.exports = {
     	contentBase: __dirname,
     	overlay: true
 	}
-}
+});
