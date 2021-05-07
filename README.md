@@ -1,5 +1,5 @@
 # Webpack5Vue3-StartProject
-Very simple project uses Webpack &amp; Vue3 (3.0.11) for fast start beginners.
+Very simple project uses Webpack5 &amp; Vue3 (3.0.11) for fast start beginners.
 
 ## Installation (Ubuntu example)
 Run console and type:
